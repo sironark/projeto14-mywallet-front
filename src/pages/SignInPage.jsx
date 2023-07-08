@@ -8,7 +8,7 @@ import { UserContext } from "../contexts/UserContext";
 export default function SignInPage() {
   const navigate = useNavigate()
   const [form, setForm] = useState({email: "", password: ""})
-  const {user, setUser} = useContext(UserContext)
+  const {setUser} = useContext(UserContext)
   
   function handleForm(e){
     setForm({...form, [e.target.name]: e.target.value})
