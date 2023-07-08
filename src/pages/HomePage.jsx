@@ -1,13 +1,32 @@
 import styled from "styled-components"
 import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
+
+  const navigate = useNavigate();
+
+  function newInput(e){
+    e.preventDefault();
+    navigate("/nova-transacao/entrada")
+  }
+
+  function newDebit(e){
+    e.preventDefault();
+    navigate("/nova-transacao/saida")
+  }
+
+  function logOut(e){
+    e.preventDefault();
+    navigate("/")
+  }
+  
   return (
     <HomeContainer>
       <Header>
         <h1>Olá, Fulano</h1>
-        <BiExit />
+        <BiExit onClick={logOut}/>
       </Header>
 
       <TransactionsContainer>
@@ -17,7 +36,7 @@ export default function HomePage() {
               <span>30/11</span>
               <strong>Almoço mãe</strong>
             </div>
-            <Value color={"negativo"}>120,00</Value>
+            <Value color={"saida"}>120,00</Value>
           </ListItemContainer>
 
           <ListItemContainer>
@@ -25,23 +44,23 @@ export default function HomePage() {
               <span>15/11</span>
               <strong>Salário</strong>
             </div>
-            <Value color={"positivo"}>3000,00</Value>
+            <Value color={"entrada"}>3000,00</Value>
           </ListItemContainer>
         </ul>
 
         <article>
           <strong>Saldo</strong>
-          <Value color={"positivo"}>2880,00</Value>
+          <Value color={"entrada"}>2880,00</Value>
         </article>
       </TransactionsContainer>
 
 
       <ButtonsContainer>
-        <button>
+        <button onClick={newInput}>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button>
+        <button onClick={newDebit}>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>
@@ -105,7 +124,7 @@ const ButtonsContainer = styled.section`
 const Value = styled.div`
   font-size: 16px;
   text-align: right;
-  color: ${(props) => (props.color === "positivo" ? "green" : "red")};
+  color: ${(props) => (props.color === "entrada" ? "green" : "red")};
 `
 const ListItemContainer = styled.li`
   display: flex;
