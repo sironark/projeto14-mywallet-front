@@ -1,14 +1,21 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { UserContext } from "../contexts/UserContext.js";
 
 export default function EachTransaction ({trans}){
-
+    let valor = Number(trans.value)
+    const {soma, setsoma} = useContext(UserContext) 
+    if(trans.type === "saida"){
+      valor = Number(trans.value) *-1 
+    }
+      setsoma(valor)
     return(
         <ListItemContainer>
               <div>
                 <span>{trans.time}</span>
                 <strong>{trans.discription}</strong>
               </div>
-              <Value color={trans.type}>{trans.value}</Value>
+              <Value color={trans.type}>{valor}</Value>
             </ListItemContainer>
     );
 }

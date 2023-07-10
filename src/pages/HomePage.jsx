@@ -13,12 +13,13 @@ export default function HomePage() {
   const [renderData, setRenderData] = useState([]);
   const navigate = useNavigate();
   const {user, setType} = useContext(UserContext)
-  
+  let somaList = []
+  const [soma, setsoma] = useState(0)
 
   useEffect(getItens,[]);
 
   function getItens(){
-    
+   
     const body = {
         email: user.email
     }
@@ -37,7 +38,16 @@ export default function HomePage() {
       }})
       .then(res => {
         console.log(res.data)
-        setRenderData(res.data)})
+        const data = res.data
+        data.reverse()
+        setRenderData(data)
+        data.forEach(element => {
+          if(element.type === "saida"){
+            somaList.push(Number(element.value) *-1)
+          }else{somaList.push(Number(element.value))}
+        })
+        setsoma(somaList.reduce((accumulator,value) =>  accumulator + value,0));
+      })
       .catch(err => console.log(err.response.data))    
   }
 
@@ -55,6 +65,7 @@ export default function HomePage() {
 
   function logOut(e){
     e.preventDefault();
+
     navigate("/")
   }
   
@@ -74,7 +85,7 @@ export default function HomePage() {
 
         <article>
           <strong>Saldo</strong>
-          <Value color={"entrada"}>2880,00</Value>
+          <Value color={soma}>{soma}</Value>
         </article>
       </TransactionsContainer>
 
@@ -148,7 +159,7 @@ const ButtonsContainer = styled.section`
 const Value = styled.div`
   font-size: 16px;
   text-align: right;
-  color: ${(props) => (props.color === "entrada" ? "green" : "red")};
+  color: ${(props) => (props.color === "entrada" || props.color > 0 ? "green" : "red")};
 `
 const ListItemContainer = styled.li`
   display: flex;

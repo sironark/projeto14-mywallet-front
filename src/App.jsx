@@ -10,6 +10,7 @@ import { UserContext } from "./contexts/UserContext"
 export default function App() {
   const [user, setUser] = useState({});
   const [type, setType] = useState("");
+  const [soma, setsoma] = useState([])
   localStorage.setItem("email", user.email)
   localStorage.setItem("token", user.token)
   localStorage.setItem("entrada", "entrada")
@@ -19,7 +20,7 @@ export default function App() {
   return (
     <PagesContainer>
       <BrowserRouter>
-      <UserContext.Provider value={{user, setUser, type, setType}}>
+      <UserContext.Provider value={{user, setUser, type, setType, soma, setsoma}}>
         <Routes>
           <Route path="/" element={<SignInPage />} />
           <Route path="/cadastro" element={<SignUpPage />} />
