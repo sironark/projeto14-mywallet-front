@@ -31,7 +31,11 @@ export default function HomePage() {
     console.log(body, config)
     //apiAuth.getTransactions(userToken, user)
 
-    axios.get(`${import.meta.env.VITE_API_URL}/transactions`,{email: user.email},
+    axios.get(`${import.meta.env.VITE_API_URL}/transactions`,{
+      params:{
+        email: user.email
+      }
+    },
     {headers: {
         'Authorization': `Bearer ${user.token}`
       }})
