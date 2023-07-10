@@ -24,7 +24,7 @@ export default function TransactionsPage() {
         navigate("/home")
       })
       .catch(err => alert(err.response.data))
-        navigate("/home")
+        
   }
 
   return (
