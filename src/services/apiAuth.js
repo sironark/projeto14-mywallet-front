@@ -19,7 +19,7 @@ function signUp(body){
 
 function getTransactions(token, body){
     console.log(token, body)
-    const promisse = axios.get(`http://localhost:5000/transactions`,body, getConfig(token))
+    const promisse = axios.get(`${import.meta.env.VITE_API_URL}`,body, getConfig(token))
     return promisse
 }
 
