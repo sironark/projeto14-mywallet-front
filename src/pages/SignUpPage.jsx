@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import MyWalletLogo from "../components/MyWalletLogo"
-import apiAuth from "../services/apiAuth";
+import apiAuth from "../services/apiAuth.js";
 import { useState } from "react";
 
 export default function SignUpPage() {
-  const [form, setForm] = useState({name: "", email: "", password: "",})
+  const [form, setForm] = useState({name: "", email: "", password: "",passwordConfirm:""})
   const navigate = useNavigate();
   const [confirm, setConfirm] = useState({confirmPass:""})
 
@@ -17,7 +17,9 @@ export default function SignUpPage() {
   function handleSignUp(e){
     e.preventDefault();
     if(form.password === form.passwordConfirm){
+      
       delete form.passwordConfirm
+      console.log(form)
     apiAuth.signUp(form)
       .then(res =>{
         navigate('/')

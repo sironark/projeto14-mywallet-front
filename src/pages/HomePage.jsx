@@ -2,18 +2,54 @@ import styled from "styled-components"
 import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import apiAuth from "../services/apiAuth.js";
+import EachTransaction from "../components/transactionsRender.jsx";
+import { UserContext } from "../contexts/UserContext.js";
+import axios from "axios";
+import React from "react";
 
 export default function HomePage() {
-
+  const [renderData, setRenderData] = useState([]);
   const navigate = useNavigate();
+  const {user, setType} = useContext(UserContext)
+  
+
+  useEffect(getItens,[]);
+
+  function getItens(){
+    
+    const body = {
+        email: user.email
+    }
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
+    }
+    console.log(body, config)
+    //apiAuth.getTransactions(userToken, user)
+
+    axios.get(`${import.meta.env.VITE_API_URL}/transactions`, 
+    {email: user.email},
+    {headers: {
+        'Authorization': `Bearer ${user.token}`
+      }})
+      .then(res => {
+        console.log(res.data)
+        setRenderData(res.data)})
+      .catch(err => console.log(err.response.data))    
+  }
 
   function newInput(e){
     e.preventDefault();
+    setType("entrada");
     navigate("/nova-transacao/entrada")
   }
 
   function newDebit(e){
     e.preventDefault();
+    setType("saida");
     navigate("/nova-transacao/saida")
   }
 
@@ -25,27 +61,15 @@ export default function HomePage() {
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, Fulano</h1>
+        <h1>Olá, {user.name}</h1>
         <BiExit onClick={logOut}/>
       </Header>
 
       <TransactionsContainer>
         <ul>
-          <ListItemContainer>
-            <div>
-              <span>30/11</span>
-              <strong>Almoço mãe</strong>
-            </div>
-            <Value color={"saida"}>120,00</Value>
-          </ListItemContainer>
-
-          <ListItemContainer>
-            <div>
-              <span>15/11</span>
-              <strong>Salário</strong>
-            </div>
-            <Value color={"entrada"}>3000,00</Value>
-          </ListItemContainer>
+          {renderData.map((rec) => (
+          <EachTransaction key={rec._id} trans={rec}/>
+          ))}
         </ul>
 
         <article>

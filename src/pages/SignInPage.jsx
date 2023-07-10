@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import MyWalletLogo from "../components/MyWalletLogo"
-import apiAuth from "../services/apiAuth";
+import apiAuth from "../services/apiAuth.js";
 import { useContext, useState } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext.js";
 
 export default function SignInPage() {
   const navigate = useNavigate()
@@ -21,7 +21,7 @@ export default function SignInPage() {
       .then(res =>{
         const{email, name, token} = res.data
         setUser({email, name, token})
-        console.log("login ok")
+        console.log(token, email)
         navigate("/home")
       })
       .catch(err=>{
