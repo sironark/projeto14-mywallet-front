@@ -3,7 +3,7 @@ import axios from "axios"
 function getConfig(token){
     return {
         headers:{
-          Authorization: `7434231d-4e08-4975-9c1d-3a2d41df72bc` 
+          Authorization: `Bearer ${token}` 
                 }
       }
 }

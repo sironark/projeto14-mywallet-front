@@ -31,8 +31,8 @@ export default function TransactionsPage() {
     <TransactionsContainer>
       <h1>Nova TRANSAÇÃO</h1>
       <form onSubmit={sendTransaction}> 
-        <input data-test="registry-amount-input"  placeholder="Valor" type="number" name="value" onChange={handleForm}/>
-        <input data-test="registry-name-input"  placeholder="Descrição" type="text" name="discription" onChange={handleForm}/>
+        <input required data-test="registry-amount-input"  placeholder="Valor" type="number" name="value" onChange={handleForm}/>
+        <input required data-test="registry-name-input"  placeholder="Descrição" type="text" name="discription" onChange={handleForm}/>
         <button data-test="registry-save" type="submit">Salvar TRANSAÇÃO</button>
       </form>
     </TransactionsContainer>
