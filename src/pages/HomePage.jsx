@@ -72,8 +72,8 @@ export default function HomePage() {
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, {user.name}</h1>
-        <BiExit onClick={logOut}/>
+        <h1 data-test="user-name">Olá, {user.name}</h1>
+        <BiExit data-test="logout" onClick={logOut}/>
       </Header>
 
       <TransactionsContainer>
@@ -85,17 +85,17 @@ export default function HomePage() {
 
         <article>
           <strong>Saldo</strong>
-          <Value color={soma}>{soma}</Value>
+          <Value data-test="total-amount" color={soma}>{soma}</Value>
         </article>
       </TransactionsContainer>
 
 
       <ButtonsContainer>
-        <button onClick={newInput}>
+        <button data-test="new-income" onClick={newInput}>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button onClick={newDebit}>
+        <button data-test="new-expense" onClick={newDebit}>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>

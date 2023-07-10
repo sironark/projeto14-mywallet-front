@@ -13,9 +13,9 @@ export default function EachTransaction ({trans}){
         <ListItemContainer>
               <div>
                 <span>{trans.time}</span>
-                <strong>{trans.discription}</strong>
+                <strong data-test="registry-name">{trans.discription}</strong>
               </div>
-              <Value color={trans.type}>{valor}</Value>
+              <Value data-test="registry-amount" color={trans.type}>{valor}</Value>
             </ListItemContainer>
     );
 }

@@ -33,7 +33,8 @@ export default function SignInPage() {
     <SingInContainer>
       <form onSubmit={handleLogin}>
         <MyWalletLogo />
-        <input placeholder="E-mail" 
+        <input data-test="email"
+        placeholder="E-mail" 
         required
         type="email" 
         name="email" 
@@ -41,7 +42,8 @@ export default function SignInPage() {
         onChange={handleForm}
         />
 
-        <input placeholder="Senha" 
+        <input data-test="password" 
+        placeholder="Senha" 
         required
         type="password" 
         autocomplete="new-password" 
@@ -50,7 +52,7 @@ export default function SignInPage() {
         onChange={handleForm}/>
         
 
-        <button type="submit">Entrar</button>
+        <button data-test="sign-in-submit" type="submit">Entrar</button>
       </form>
 
       <Link to="/cadastro">
