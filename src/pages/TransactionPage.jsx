@@ -21,10 +21,10 @@ export default function TransactionsPage() {
     console.log(body)
     apiAuth.createTransaction(user.token, body )
       .then(res =>{
-
+        navigate("/home")
       })
-      .catch(err => console.log(err.response.data))
-    navigate("/home")
+      .catch(err => alert(err.response.data))
+        navigate("/home")
   }
 
   return (

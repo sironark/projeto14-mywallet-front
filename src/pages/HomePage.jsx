@@ -48,7 +48,7 @@ export default function HomePage() {
         })
         setsoma(somaList.reduce((accumulator,value) =>  accumulator + value,0));
       })
-      .catch(err => console.log(err.response.data))    
+      .catch(err => alert(err.response.data))    
   }
 
   function newInput(e){
