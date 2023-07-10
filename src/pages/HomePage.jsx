@@ -31,22 +31,22 @@ export default function HomePage() {
     console.log(body, config)
     //apiAuth.getTransactions(userToken, user)
 
-    axios.get(`${import.meta.env.VITE_API_URL}/transactions`, 
-    {email: user.email},
+    axios.get(`${import.meta.env.VITE_API_URL}/transactions`,{email: user.email},
     {headers: {
         'Authorization': `Bearer ${user.token}`
       }})
+
       .then(res => {
-        console.log(res.data)
-        const data = res.data
-        data.reverse()
-        setRenderData(data)
-        data.forEach(element => {
-          if(element.type === "saida"){
-            somaList.push(Number(element.value) *-1)
-          }else{somaList.push(Number(element.value))}
-        })
-        setsoma(somaList.reduce((accumulator,value) =>  accumulator + value,0));
+          console.log(res.data)
+          const data = res.data
+          data.reverse()
+          setRenderData(data)
+          data.forEach(element => {
+              if(element.type === "saida"){
+                somaList.push(Number(element.value) *-1)
+              }else{somaList.push(Number(element.value))}
+          })
+          setsoma(somaList.reduce((accumulator,value) =>  accumulator + value,0));
       })
       .catch(err => alert(err.response.data))    
   }
